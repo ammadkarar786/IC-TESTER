@@ -927,11 +927,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
-    }
-    }
-
-  
-  
-  }    
+    }}} 
+       
     
     
