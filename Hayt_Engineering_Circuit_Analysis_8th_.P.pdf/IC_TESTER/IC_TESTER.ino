@@ -378,8 +378,5 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           Serial.println(gate_fail_pin[i]);
           }
     }
-    }
-
-  
-  
-  }
+    }}
+    
