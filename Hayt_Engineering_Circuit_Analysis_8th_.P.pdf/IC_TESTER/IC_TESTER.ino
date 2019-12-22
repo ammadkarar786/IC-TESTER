@@ -10,6 +10,7 @@ void loop()
 {
   AND();
   OR();
+  NOR();
     }
 
 void AND(){
