@@ -1,7 +1,7 @@
 void setup()
 {
   Serial.begin(9600);
-  for(int i=0;i<=13;i++){
+  for(int i=21;i<=41;i++){///ZIP SOCKET 20PIN 
   pinMode(i,OUTPUT);
   }
 }
