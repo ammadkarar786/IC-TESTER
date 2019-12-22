@@ -8,6 +8,11 @@ void setup()
 
 void loop()
 {
+  AND();
+    }
+
+void AND(){
+  {
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -187,3 +192,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           }
     }
     }
+
+  
+  
+  }
