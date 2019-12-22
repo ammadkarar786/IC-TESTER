@@ -8,6 +8,7 @@ void setup()
 
 void loop()
 {
+  ////TTHE VCC AND THE GNG ARE GIVEN AT PIN NO 34 (VCC)AND PIN 35 IS GND
   AND();
   OR();
     }
