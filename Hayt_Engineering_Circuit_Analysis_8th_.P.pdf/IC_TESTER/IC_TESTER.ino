@@ -1104,9 +1104,171 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           Serial.println(gate_fail_pin[i]);
           }
     }
+    }}
+    
+void AND_3(){
+  // 7411(3-AND)
+  int gate_clear=0;
+  int gate_fail=0;
+  ///i,f j shold be declare gate 1 
+  int i=0;//1
+  int f=0;//2
+  int j=0;//13
+  int z=0;
+  int sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(13,i);
+     digitalWrite(12,f);
+     digitalWrite(11,j);
+    if (digitalRead(10)==0){
+       z++;
+      Serial.print(" 1:");
+      Serial.print(i);
+      Serial.print(" 2:");
+      Serial.print(f);
+      Serial.print(" 13:");
+      Serial.println(j);
+      Serial.println("3-AND Pass");
     }
-
-  
+    if(i==1 && f==1 && j==1 && digitalRead(10)==1)    
+    {
+       z++;
+      Serial.print(" 1:");
+      Serial.print(i);
+      Serial.print(" 2:");
+      Serial.print(f);
+      Serial.print(" 13:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
   
   }
+}
+  }
+if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-AND GATE 1 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-AND GATE 1 Fail");
+      }
+  
+
+///i,f j shold be declare gate 2
+   i=0;//3
+   f=0;//4
+   j=0;//5
+   z=0;
+   sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
     
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(9,i);
+     digitalWrite(8,f);
+     digitalWrite(7,j);
+    if (digitalRead(6)==0){
+       z++;
+      Serial.print(" 3:");
+      Serial.print(i);
+      Serial.print(" 4:");
+      Serial.print(f);
+      Serial.print(" 5:");
+      Serial.println(j);
+      Serial.println("3-AND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(6)==1)    
+    {
+       sz++;
+      Serial.print(" 3:");
+      Serial.print(i);
+      Serial.print(" 4:");
+      Serial.print(f);
+      Serial.print(" 5:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-AND GATE 2 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-AND GATE 2 Fail");
+      }
+  
+
+
+///i,f j shold be declare gate 3
+   i=0;//11
+   f=0;//10
+   j=0;//9
+   z=0;
+   sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(5,i);
+     digitalWrite(4,f);
+     digitalWrite(3,j);
+    if (digitalRead(2)==0){
+       z++;
+      Serial.print(" 11:");
+      Serial.print(i);
+      Serial.print(" 10:");
+      Serial.print(f);
+      Serial.print(" 9:");
+      Serial.println(j);
+      Serial.println("3-AND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(6)==1)    
+    {
+       sz++;
+      Serial.print(" 11:");
+      Serial.print(i);
+      Serial.print(" 10:");
+      Serial.print(f);
+      Serial.print(" 9:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+ if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-AND GATE 3 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-AND GATE 3 Fail");
+      }
+  
+
+if (gate_clear==3){
+  Serial.println("3-AND GATE PASS");
+  }else if(gate_fail==3){
+    Serial.println("3-AND GATE fail");
+    }else{
+    Serial.println("3-AND GATE not all gate perfect");
+    }
+}    
