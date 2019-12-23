@@ -1105,6 +1105,174 @@ if (gate_clear==3){
     Serial.println("3-AND GATE not all gate perfect");
     }
 }    
+   
+void NAND_3(){
+  // 7410(3-NAND)
+  int gate_clear=0;
+  int gate_fail=0;
+  ///i,f j shold be declare gate 1 
+  int i=0;//1
+  int f=0;//2
+  int j=0;//13
+  int z=0;
+  int sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(22,i);
+     digitalWrite(23,f);
+     digitalWrite(28,j);
+    if (digitalRead(29)==1){
+       z++;
+      Serial.print(" 1:");
+      Serial.print(i);
+      Serial.print(" 2:");
+      Serial.print(f);
+      Serial.print(" 13:");
+      Serial.println(j);
+      Serial.println("3-NAND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(10)==0)    
+    {
+       z++;
+      Serial.print(" 1:");
+      Serial.print(i);
+      Serial.print(" 2:");
+      Serial.print(f);
+      Serial.print(" 13:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-NAND GATE 1 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-NAND GATE 1 Fail");
+      }
+  
+
+///i,f j shold be declare gate 2
+   i=0;//3
+   f=0;//4
+   j=0;//5
+   z=0;
+   sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(24,i);
+     digitalWrite(25,f);
+     digitalWrite(26,j);
+    if (digitalRead(27)==1){
+       z++;
+      Serial.print(" 3:");
+      Serial.print(i);
+      Serial.print(" 4:");
+      Serial.print(f);
+      Serial.print(" 5:");
+      Serial.println(j);
+      Serial.println("3-NAND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(27)==0)    
+    {
+       sz++;
+      Serial.print(" 3:");
+      Serial.print(i);
+      Serial.print(" 4:");
+      Serial.print(f);
+      Serial.print(" 5:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-NAND GATE 2 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-NAND GATE 2 Fail");
+      }
+  
+
+
+///i,f j shold be declare gate 3
+   i=0;//11
+   f=0;//10
+   j=0;//9
+   z=0;
+   sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(30,i);
+     digitalWrite(31,f);
+     digitalWrite(32,j);
+    if (digitalRead(33)==1){
+       z++;
+      Serial.print(" 11:");
+      Serial.print(i);
+      Serial.print(" 10:");
+      Serial.print(f);
+      Serial.print(" 9:");
+      Serial.println(j);
+      Serial.println("3-NAND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(33)==0)    
+    {
+       sz++;
+      Serial.print(" 11:");
+      Serial.print(i);
+      Serial.print(" 10:");
+      Serial.print(f);
+      Serial.print(" 9:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+ if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-NAND GATE 3 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-NAND GATE 3 Fail");
+      }
+  
+
+if (gate_clear==3){
+  Serial.println("3-NAND GATE PASS");
+  }else if(gate_fail==3){
+    Serial.println("3-NAND GATE fail");
+    }else{
+    Serial.println("3-NAND GATE not all gate perfect");
+    }
+}    
+
     
 
 
