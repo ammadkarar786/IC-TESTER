@@ -1,25 +1,26 @@
-#include <LiquidCrystal_I2C.h>
-
-LiquidCrystal_I2C lcd(0x27, 20,4);
 void setup()
 {
-  lcd.init();  
-  lcd.begin(16,2);
-  lcd.backlight(); 
   Serial.begin(9600);
-  for(int i=0;i<=13;i++){
-  pinMode(i,OUTPUT);}
-lcd.setCursor(0,0);
-lcd.print("Enter is ")  ;
-}
-
-
+  for(int i=22;i<=41;i++){
+  pinMode(i,OUTPUT);
+  }
+}/*PIN CONFIGRATION IN ARDUNIO MEGA
+22     34->VCC FOR 14 PIN IC 
+23     28
+24     29
+25     30
+26     31
+27     32     
+35->GND33
+37     34
+38     35
+39     36
+*/
 void loop()
 {
-//  AND();
-//  OR();
-//  NOR();
-//  XOR();
+  ////TTHE VCC AND THE GNG ARE GIVEN AT PIN NO 34 (VCC)AND PIN 35 IS GND
+  AND();
+  OR();
     }
 
 void AND(){
@@ -34,17 +35,17 @@ void AND(){
   gate_clear=0;
   bool gate1;
   int p3=3;
-   digitalWrite(13,1);
-   digitalWrite(12,1);
-  if( digitalRead(11)==1){/// first gate clear
+   digitalWrite(22,1);
+   digitalWrite(23,1);
+  if( digitalRead(24)==1){/// first gate clear
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,1);
-   if(digitalRead(11)==0){
+    digitalWrite(22,0);
+   digitalWrite(23,1);
+   if(digitalRead(24)==0){
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,0);
-   if (digitalRead(11)==0){
+    digitalWrite(22,0);
+   digitalWrite(23,0);
+   if (digitalRead(24)==0){
     Serial.println("AND GATE 1 CLEAR PIN 1,2,3");
     }else{
       gate_fail++;
@@ -75,17 +76,17 @@ void AND(){
   gate_clear=0;
   bool gate2;
   p3=6;
-   digitalWrite(10,1);
-   digitalWrite(9,1);
-  if( digitalRead(8)==1){/// 2nd gate clear
+   digitalWrite(25,1);
+   digitalWrite(26,1);
+  if( digitalRead(27)==1){/// 2nd gate clear
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,1);
-   if(digitalRead(8)==0){
+    digitalWrite(25,0);
+   digitalWrite(26,1);
+   if(digitalRead(27)==0){
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,0);
-   if (digitalRead(8)==0){
+    digitalWrite(25,0);
+   digitalWrite(26,0);
+   if (digitalRead(27)==0){
     Serial.println("AND GATE 2 CLEAR PIN 4,5,6");
     }else{
       gate_fail++;
@@ -115,17 +116,17 @@ void AND(){
     gate_fail=0;
   gate_clear=0;
   bool gate3;
-   digitalWrite(7,1);
-   digitalWrite(6,1);
-  if( digitalRead(5)==1){/// 3rd gate clear
+   digitalWrite(28,1);
+   digitalWrite(29,1);
+  if( digitalRead(30)==1){/// 3rd gate clear
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,1);
-    if(digitalRead(5)==0){
+    digitalWrite(28,0);
+   digitalWrite(29,1);
+    if(digitalRead(30)==0){
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,0);
-   if (digitalRead(5)==0){
+    digitalWrite(28,0);
+   digitalWrite(29,0);
+   if (digitalRead(30)==0){
     Serial.println("AND GATE 3 CLEAR PIN 13,12,11");
     }else{
       gate_fail++;
@@ -156,17 +157,17 @@ add++;
   gate_clear=0;
   bool gate4;
   p3=8;
-   digitalWrite(4,1);
-   digitalWrite(3,1);
-  if( digitalRead(2)==1){/// 4th gate clear
+   digitalWrite(31,1);
+   digitalWrite(32,1);
+  if( digitalRead(33)==1){/// 4th gate clear
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,1);
-   if(digitalRead(2)==0){
+    digitalWrite(31,0);
+   digitalWrite(32,1);
+   if(digitalRead(33)==0){
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,0);
-     if (digitalRead(2)==0){
+    digitalWrite(31,0);
+   digitalWrite(32,0);
+     if (digitalRead(33)==0){
     Serial.println("AND GATE 4 CLEAR PIN 10,9,8");
     }else{
       gate_fail++;
@@ -220,17 +221,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_clear=0;
   bool gate1;
   int p3=3;
-   digitalWrite(13,1);
-   digitalWrite(12,1);
-  if( digitalRead(11)==1){/// first gate clear
+   digitalWrite(22,1);
+   digitalWrite(23,1);
+  if( digitalRead(24)==1){/// first gate clear
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,1);
-   if(digitalRead(11)==1){
+    digitalWrite(22,0);
+   digitalWrite(23,1);
+   if(digitalRead(24)==1){
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,0);
-   if (digitalRead(11)==0){
+    digitalWrite(22,0);
+   digitalWrite(23,0);
+   if (digitalRead(24)==0){
     Serial.println("OR GATE 1 CLEAR PIN 1,2,3");
     }else{
       gate_fail++;
@@ -261,17 +262,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_clear=0;
   bool gate2;
   p3=6;
-   digitalWrite(10,1);
-   digitalWrite(9,1);
-  if( digitalRead(8)==1){/// 2nd gate clear
+   digitalWrite(25,1);
+   digitalWrite(26,1);
+  if( digitalRead(27)==1){/// 2nd gate clear
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,1);
-   if(digitalRead(8)==1){
+    digitalWrite(25,0);
+   digitalWrite(26,1);
+   if(digitalRead(27)==1){
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,0);
-   if (digitalRead(8)==0){
+    digitalWrite(25,0);
+   digitalWrite(26,0);
+   if (digitalRead(27)==0){
     Serial.println("OR GATE 2 CLEAR PIN 4,5,6");
     }else{
       gate_fail++;
@@ -301,17 +302,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     gate_fail=0;
   gate_clear=0;
   bool gate3;
-   digitalWrite(7,1);
-   digitalWrite(6,1);
-  if( digitalRead(5)==1){/// 3rd gate clear
+   digitalWrite(28,1);
+   digitalWrite(29,1);
+  if( digitalRead(30)==1){/// 3rd gate clear
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,1);
-    if(digitalRead(5)==1){
+    digitalWrite(28,0);
+   digitalWrite(29,1);
+    if(digitalRead(30)==1){
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,0);
-   if (digitalRead(5)==0){
+    digitalWrite(28,0);
+   digitalWrite(29,0);
+   if (digitalRead(30)==0){
     Serial.println("OR GATE 3 CLEAR PIN 13,12,11");
     }else{
       gate_fail++;
@@ -342,17 +343,17 @@ add++;
   gate_clear=0;
   bool gate4;
   p3=8;
-   digitalWrite(4,1);
-   digitalWrite(3,1);
-  if( digitalRead(2)==1){/// 4th gate clear
+   digitalWrite(31,1);
+   digitalWrite(32,1);
+  if( digitalRead(33)==1){/// 4th gate clear
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,1);
-   if(digitalRead(2)==1){
+    digitalWrite(31,0);
+   digitalWrite(32,1);
+   if(digitalRead(33)==1){
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,0);
-     if (digitalRead(2)==0){
+    digitalWrite(31,0);
+   digitalWrite(32,0);
+     if (digitalRead(33)==0){
     Serial.println("OR GATE 4 CLEAR PIN 10,9,8");
     }else{
       gate_fail++;
@@ -388,8 +389,12 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           Serial.println(gate_fail_pin[i]);
           }
     }
-    }}
-    void NOR()
+    }
+
+  
+  
+  }
+  void NOR(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -400,18 +405,18 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_fail=0;
   gate_clear=0;
   bool gate1;
-  int p3=3;
-   digitalWrite(11,1);
-   digitalWrite(12,1);
-  if( digitalRead(13)==0){/// first gate clear
+  int p3=1;
+   digitalWrite(23,1);
+   digitalWrite(24,1);
+  if( digitalRead(22)==0){/// first gate clear
     gate_clear++;
-    digitalWrite(11,0);
-   digitalWrite(12,1);
-   if(digitalRead(13)==0){
+    digitalWrite(23,0);
+   digitalWrite(24,1);
+   if(digitalRead(22)==0){
     gate_clear++;
-    digitalWrite(11,0);
-   digitalWrite(12,0);
-   if (digitalRead(13)==1){
+    digitalWrite(23,0);
+   digitalWrite(24,0);
+   if (digitalRead(22)==1){
     Serial.println("NOR GATE 1 CLEAR PIN 1,2,3");
     }else{
       gate_fail++;
@@ -441,18 +446,18 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_fail=0;
   gate_clear=0;
   bool gate2;
-  p3=6;
-   digitalWrite(10,1);
-   digitalWrite(9,1);
-  if( digitalRead(8)==0){/// 2nd gate clear
+  p3=4;
+   digitalWrite(26,1);
+   digitalWrite(27,1);
+  if( digitalRead(25)==0){/// 2nd gate clear
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,1);
-   if(digitalRead(8)==0){
+    digitalWrite(26,0);
+   digitalWrite(27,1);
+   if(digitalRead(25)==0){
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,0);
-   if (digitalRead(8)==0){
+    digitalWrite(26,0);
+   digitalWrite(27,0);
+   if (digitalRead(25)==0){
     Serial.println("NOR GATE 2 CLEAR PIN 4,5,6");
     }else{
       gate_fail++;
@@ -482,17 +487,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     gate_fail=0;
   gate_clear=0;
   bool gate3;
-   digitalWrite(5,1);
-   digitalWrite(6,1);
-  if( digitalRead(7)==1){/// 3rd gate clear
+   digitalWrite(29,1);
+   digitalWrite(30,1);
+  if( digitalRead(28)==1){/// 3rd gate clear
     gate_clear++;
-    digitalWrite(5,0);
-   digitalWrite(6,1);
-    if(digitalRead(7)==0){
+    digitalWrite(29,0);
+   digitalWrite(30,1);
+    if(digitalRead(28)==0){
     gate_clear++;
-    digitalWrite(5,0);
-   digitalWrite(6,0);
-   if (digitalRead(7)==0){
+    digitalWrite(29,0);
+   digitalWrite(30,0);
+   if (digitalRead(28)==0){
     Serial.println("NOR GATE 3 CLEAR PIN 13,12,11");
     }else{
       gate_fail++;
@@ -522,18 +527,18 @@ add++;
   gate_fail=0;
   gate_clear=0;
   bool gate4;
-  p3=8;
-   digitalWrite(2,1);
-   digitalWrite(3,1);
-  if( digitalRead(4)==1){/// 4th gate clear
+  p3=10;
+   digitalWrite(32,1);
+   digitalWrite(33,1);
+  if( digitalRead(31)==1){/// 4th gate clear
     gate_clear++;
-    digitalWrite(2,0);
-   digitalWrite(3,1);
-   if(digitalRead(4)==0){
+    digitalWrite(32,0);
+   digitalWrite(33,1);
+   if(digitalRead(31)==0){
     gate_clear++;
-    digitalWrite(2,0);
-   digitalWrite(3,0);
-     if (digitalRead(4)==0){
+    digitalWrite(32,0);
+   digitalWrite(33,0);
+     if (digitalRead(31)==0){
     Serial.println("NOR GATE 4 CLEAR PIN 10,9,8");
     }else{
       gate_fail++;
@@ -569,8 +574,9 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           Serial.println(gate_fail_pin[i]);
           }
     }
-    }
-    void NAND(){
+    }}
+
+void NAND(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -582,17 +588,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_clear=0;
   bool gate1;
   int p3=3;
-   digitalWrite(13,1);
-   digitalWrite(12,1);
-  if( digitalRead(11)==0){/// first gate clear
+   digitalWrite(22,1);
+   digitalWrite(23,1);
+  if( digitalRead(24)==0){/// first gate clear
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,1);
-   if(digitalRead(11)==1){
+    digitalWrite(22,0);
+   digitalWrite(23,1);
+   if(digitalRead(24)==1){
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,0);
-   if (digitalRead(11)==1){
+    digitalWrite(22,0);
+   digitalWrite(23,0);
+   if (digitalRead(24)==1){
     Serial.println("NAND GATE 1 CLEAR PIN 1,2,3");
     }else{
       gate_fail++;
@@ -623,17 +629,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_clear=0;
   bool gate2;
   p3=6;
-   digitalWrite(10,1);
-   digitalWrite(9,1);
-  if( digitalRead(8)==0){/// 2nd gate clear
+   digitalWrite(25,1);
+   digitalWrite(26,1);
+  if( digitalRead(27)==0){/// 2nd gate clear
     gate_clear++;
-    digitalWrite(10,1);
-   digitalWrite(9,1);
-   if(digitalRead(8)==1){
+    digitalWrite(25,1);
+   digitalWrite(26,1);
+   if(digitalRead(27)==1){
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,0);
-   if (digitalRead(8)==1){
+    digitalWrite(25,0);
+   digitalWrite(26,0);
+   if (digitalRead(27)==1){
     Serial.println("NAND GATE 2 CLEAR PIN 4,5,6");
     }else{
       gate_fail++;
@@ -663,17 +669,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     gate_fail=0;
   gate_clear=0;
   bool gate3;
-   digitalWrite(7,1);
-   digitalWrite(6,1);
-  if( digitalRead(5)==0){/// 3rd gate clear
+   digitalWrite(28,1);
+   digitalWrite(29,1);
+  if( digitalRead(30)==0){/// 3rd gate clear
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,1);
-    if(digitalRead(5)==1){
+    digitalWrite(28,0);
+   digitalWrite(29,1);
+    if(digitalRead(30)==1){
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,0);
-   if (digitalRead(5)==1){
+    digitalWrite(28,0);
+   digitalWrite(29,0);
+   if (digitalRead(30)==1){
     Serial.println("NAND GATE 3 CLEAR PIN 13,12,11");
     }else{
       gate_fail++;
@@ -704,17 +710,17 @@ add++;
   gate_clear=0;
   bool gate4;
   p3=8;
-   digitalWrite(4,1);
-   digitalWrite(3,1);
-  if( digitalRead(2)==0){/// 4th gate clear
+   digitalWrite(31,1);
+   digitalWrite(32,1);
+  if( digitalRead(33)==0){/// 4th gate clear
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,1);
-   if(digitalRead(2)==1){
+    digitalWrite(31,0);
+   digitalWrite(32,1);
+   if(digitalRead(33)==1){
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,0);
-     if (digitalRead(2)==1){
+    digitalWrite(31,0);
+   digitalWrite(32,0);
+     if (digitalRead(33)==1){
     Serial.println("NAND GATE 4 CLEAR PIN 10,9,8");
     }else{
       gate_fail++;
@@ -751,7 +757,8 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           }
     }
     }}
-    void XOR(){
+
+void XOR(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -763,17 +770,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_clear=0;
   bool gate1;
   int p3=3;
-   digitalWrite(13,1);
-   digitalWrite(12,1);
-  if( digitalRead(11)==0){/// first gate clear
+   digitalWrite(22,1);
+   digitalWrite(23,1);
+  if( digitalRead(24)==0){/// first gate clear
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,1);
-   if(digitalRead(11)==1){
+    digitalWrite(22,0);
+   digitalWrite(23,1);
+   if(digitalRead(24)==1){
     gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,0);
-   if (digitalRead(11)==0){
+    digitalWrite(22,0);
+   digitalWrite(23,0);
+   if (digitalRead(24)==0){
     Serial.println("XOR GATE 1 CLEAR PIN 1,2,3");
     }else{
       gate_fail++;
@@ -804,17 +811,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   gate_clear=0;
   bool gate2;
   p3=6;
-   digitalWrite(10,1);
-   digitalWrite(9,1);
-  if( digitalRead(8)==0){/// 2nd gate clear
+   digitalWrite(25,1);
+   digitalWrite(26,1);
+  if( digitalRead(27)==0){/// 2nd gate clear
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,1);
-   if(digitalRead(8)==1){
+    digitalWrite(25,0);
+   digitalWrite(26,1);
+   if(digitalRead(27)==1){
     gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,0);
-   if (digitalRead(8)==0){
+    digitalWrite(25,0);
+   digitalWrite(26,0);
+   if (digitalRead(27)==0){
     Serial.println("XOR GATE 2 CLEAR PIN 4,5,6");
     }else{
       gate_fail++;
@@ -844,17 +851,17 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     gate_fail=0;
   gate_clear=0;
   bool gate3;
-   digitalWrite(7,1);
-   digitalWrite(6,1);
-  if( digitalRead(5)==0){/// 3rd gate clear
+   digitalWrite(28,1);
+   digitalWrite(29,1);
+  if( digitalRead(30)==0){/// 3rd gate clear
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,1);
-    if(digitalRead(5)==1){
+    digitalWrite(28,0);
+   digitalWrite(29,1);
+    if(digitalRead(30)==1){
     gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,0);
-   if (digitalRead(5)==0){
+    digitalWrite(28,0);
+   digitalWrite(29,0);
+   if (digitalRead(30)==0){
     Serial.println("XOR GATE 3 CLEAR PIN 13,12,11");
     }else{
       gate_fail++;
@@ -885,17 +892,17 @@ add++;
   gate_clear=0;
   bool gate4;
   p3=8;
-   digitalWrite(4,1);
-   digitalWrite(3,1);
-  if( digitalRead(2)==0){/// 4th gate clear
+   digitalWrite(31,1);
+   digitalWrite(32,1);
+  if( digitalRead(33)==0){/// 4th gate clear
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,1);
-   if(digitalRead(2)==1){
+    digitalWrite(31,0);
+   digitalWrite(32,1);
+   if(digitalRead(33)==1){
     gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,0);
-     if (digitalRead(2)==0){
+    digitalWrite(31,0);
+   digitalWrite(32,0);
+     if (digitalRead(33)==0){
     Serial.println("XOR GATE 4 CLEAR PIN 10,9,8");
     }else{
       gate_fail++;
@@ -922,7 +929,7 @@ add++;
 if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("XOR PASSES TEST");
 }else if(add==4){
-  Serial.println("Add gate test Fail");
+  Serial.println("XOR gate test Fail");
 }
   else{
         Serial.println("list of fault gate pin");
@@ -930,190 +937,8 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
-    }
-    }}
-    void XNOR(){
-  {
-  int gate_clear=0;
-  int gate_fail=0;
-  int gate_fail_pin[4];
-  int add=0;
-  //first gate/ //74266
-  //pin number
-  gate_fail=0;
-  gate_clear=0;
-  bool gate1;
-  int p3=3;
-   digitalWrite(13,1);
-   digitalWrite(12,1);
-  if( digitalRead(11)==1){/// first gate clear
-    gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,1);
-   if(digitalRead(11)==0){
-    gate_clear++;
-    digitalWrite(13,0);
-   digitalWrite(12,0);
-   if (digitalRead(11)==1){
-    Serial.println("XNOR GATE 1 CLEAR PIN 1,2,3");
-    }else{
-      gate_fail++;
-      }
-   }else{
-    gate_fail++;
-      }
+    }}} 
    
-    }
-    
-   else{  ////first gate not clear
-    gate_fail++;
-    Serial.println("First gate not clear 1,2,3");
-   }
-   if (gate_fail>0){
-    gate1=false;
-      
-      gate_fail_pin[add]=p3;
-    add++;
-}
-    else{
-    gate1=true;
-    }
-///checking of gate one ended
-//Second gate/ //74266
-  //pin number
-  gate_fail=0;
-  gate_clear=0;
-  bool gate2;
-  p3=6;
-   digitalWrite(10,1);
-   digitalWrite(9,1);
-  if( digitalRead(8)==1){/// 2nd gate clear
-    gate_clear++;
-    digitalWrite(10,1);
-   digitalWrite(9,1);
-   if(digitalRead(8)==0){
-    gate_clear++;
-    digitalWrite(10,0);
-   digitalWrite(9,0);
-   if (digitalRead(8)==1){
-    Serial.println("XNOR GATE 2 CLEAR PIN 4,5,6");
-    }else{
-      gate_fail++;
-      }
-   }else{
-    gate_fail++;
-      }
-   
-    }
-    
-   else{  ////2nd gate not clear
-    gate_fail++;
-    Serial.println("XNOR GATE 2 not clear PIN 4,5,6");
-   }
-   if (gate_fail>0){
-    gate2=false;
-    
-    gate_fail_pin[add]=p3;
-    add++;
-    }
-    else{
-    gate2=true;
-    }
-//third gate/ //74266
-  //pin number
-  p3=11;
-    gate_fail=0;
-  gate_clear=0;
-  bool gate3;
-   digitalWrite(7,1);
-   digitalWrite(6,1);
-  if( digitalRead(5)==1){/// 3rd gate clear
-    gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,1);
-    if(digitalRead(5)==0){
-    gate_clear++;
-    digitalWrite(7,0);
-   digitalWrite(6,0);
-   if (digitalRead(5)==1){
-    Serial.println("XNOR GATE 3 CLEAR PIN 13,12,11");
-    }else{
-      gate_fail++;
-      }
-   }else{
-    gate_fail++;
-      }
-   
-    }
-    
-   else{  ////3rd gate not clear
-    gate_fail++;
-    Serial.println("3rd gate not clear 13,12,11");
-   }
-   if (gate_fail>0){
-    gate3=false;
-    gate_fail_pin[add]=p3;
-add++;
-    }
-    else{
-    gate3=true;
-    }
-///checking of gate 3rd ended
-    
-//4th gate/ //74266
-  //pin number
-  gate_fail=0;
-  gate_clear=0;
-  bool gate4;
-  p3=8;
-   digitalWrite(4,1);
-   digitalWrite(3,1);
-  if( digitalRead(2)==1){/// 4th gate clear
-    gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,1);
-   if(digitalRead(2)==0){
-    gate_clear++;
-    digitalWrite(4,0);
-   digitalWrite(3,0);
-     if (digitalRead(2)==1){
-    Serial.println("XNOR GATE 4 CLEAR PIN 10,9,8");
-    }else{
-      gate_fail++;
-      }
-   }else{
-    gate_fail++;
-      }
- 
-    }
-    
-   else{  ////4th gate not clear
-    gate_fail++;
-    Serial.println("4th gate not clear 10,9,8");
-   }
-   if (gate_fail>0){
-    gate4=false;
-    gate_fail_pin[add]=p3;
-    add++;
-}
-    if (gate_clear>0){
-   gate4=true;
-    }///checking of gate 4th ended
-
-if (gate1==true && gate2==true && gate3==true &&gate4==true){
-  Serial.println("XNOR PASSES TEST");
-}else if(add==4){
-  Serial.println("XNOR gate test Fail");
-}
-  else{
-        Serial.println("list of fault gate pin");
-         
-         for (int i=0;i<add;i++){
-          Serial.println(gate_fail_pin[i]);
-          }
-    }
-    }}
-    
 void AND_3(){
   // 7411(3-AND)
   int gate_clear=0;
@@ -1130,10 +955,10 @@ void AND_3(){
     for(int f=0;f<=1;f++){
      for(int j=0;j<=1;j++){
       Serial.print("important");
-    digitalWrite(13,i);
-     digitalWrite(12,f);
-     digitalWrite(11,j);
-    if (digitalRead(10)==0){
+    digitalWrite(22,i);
+     digitalWrite(23,f);
+     digitalWrite(28,j);
+    if (digitalRead(29)==0){
        z++;
       Serial.print(" 1:");
       Serial.print(i);
@@ -1181,10 +1006,10 @@ Serial.println("3-AND GATE 1 PASS");
     for(int f=0;f<=1;f++){
      for(int j=0;j<=1;j++){
       Serial.print("important");
-    digitalWrite(9,i);
-     digitalWrite(8,f);
-     digitalWrite(7,j);
-    if (digitalRead(6)==0){
+    digitalWrite(24,i);
+     digitalWrite(25,f);
+     digitalWrite(26,j);
+    if (digitalRead(27)==0){
        z++;
       Serial.print(" 3:");
       Serial.print(i);
@@ -1194,7 +1019,7 @@ Serial.println("3-AND GATE 1 PASS");
       Serial.println(j);
       Serial.println("3-AND Pass");
     }
-    if(i==1 && f==1 && j==1 && digitalRead(6)==1)    
+    if(i==1 && f==1 && j==1 && digitalRead(27)==1)    
     {
        sz++;
       Serial.print(" 3:");
@@ -1233,10 +1058,10 @@ Serial.println("3-AND GATE 2 PASS");
     for(int f=0;f<=1;f++){
      for(int j=0;j<=1;j++){
       Serial.print("important");
-    digitalWrite(5,i);
-     digitalWrite(4,f);
-     digitalWrite(3,j);
-    if (digitalRead(2)==0){
+    digitalWrite(30,i);
+     digitalWrite(31,f);
+     digitalWrite(32,j);
+    if (digitalRead(33)==0){
        z++;
       Serial.print(" 11:");
       Serial.print(i);
@@ -1246,7 +1071,7 @@ Serial.println("3-AND GATE 2 PASS");
       Serial.println(j);
       Serial.println("3-AND Pass");
     }
-    if(i==1 && f==1 && j==1 && digitalRead(6)==1)    
+    if(i==1 && f==1 && j==1 && digitalRead(33)==1)    
     {
        sz++;
       Serial.print(" 11:");
@@ -1280,3 +1105,177 @@ if (gate_clear==3){
     Serial.println("3-AND GATE not all gate perfect");
     }
 }    
+   
+void NAND_3(){
+  // 7410(3-NAND)
+  int gate_clear=0;
+  int gate_fail=0;
+  ///i,f j shold be declare gate 1 
+  int i=0;//1
+  int f=0;//2
+  int j=0;//13
+  int z=0;
+  int sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(22,i);
+     digitalWrite(23,f);
+     digitalWrite(28,j);
+    if (digitalRead(29)==1){
+       z++;
+      Serial.print(" 1:");
+      Serial.print(i);
+      Serial.print(" 2:");
+      Serial.print(f);
+      Serial.print(" 13:");
+      Serial.println(j);
+      Serial.println("3-NAND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(10)==0)    
+    {
+       z++;
+      Serial.print(" 1:");
+      Serial.print(i);
+      Serial.print(" 2:");
+      Serial.print(f);
+      Serial.print(" 13:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-NAND GATE 1 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-NAND GATE 1 Fail");
+      }
+  
+
+///i,f j shold be declare gate 2
+   i=0;//3
+   f=0;//4
+   j=0;//5
+   z=0;
+   sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(24,i);
+     digitalWrite(25,f);
+     digitalWrite(26,j);
+    if (digitalRead(27)==1){
+       z++;
+      Serial.print(" 3:");
+      Serial.print(i);
+      Serial.print(" 4:");
+      Serial.print(f);
+      Serial.print(" 5:");
+      Serial.println(j);
+      Serial.println("3-NAND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(27)==0)    
+    {
+       sz++;
+      Serial.print(" 3:");
+      Serial.print(i);
+      Serial.print(" 4:");
+      Serial.print(f);
+      Serial.print(" 5:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-NAND GATE 2 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-NAND GATE 2 Fail");
+      }
+  
+
+
+///i,f j shold be declare gate 3
+   i=0;//11
+   f=0;//10
+   j=0;//9
+   z=0;
+   sz=0;
+  Serial.println("start");
+  for (int i=0;i<=1;i++){
+    
+    for(int f=0;f<=1;f++){
+     for(int j=0;j<=1;j++){
+      Serial.print("important");
+    digitalWrite(30,i);
+     digitalWrite(31,f);
+     digitalWrite(32,j);
+    if (digitalRead(33)==1){
+       z++;
+      Serial.print(" 11:");
+      Serial.print(i);
+      Serial.print(" 10:");
+      Serial.print(f);
+      Serial.print(" 9:");
+      Serial.println(j);
+      Serial.println("3-NAND Pass");
+    }
+    if(i==1 && f==1 && j==1 && digitalRead(33)==0)    
+    {
+       sz++;
+      Serial.print(" 11:");
+      Serial.print(i);
+      Serial.print(" 10:");
+      Serial.print(f);
+      Serial.print(" 9:");
+      Serial.println(j);
+      
+      Serial.println("second case pass");
+    }
+    
+  
+  }
+}
+  }
+ if(z==7 && sz==1){
+    gate_clear++;
+Serial.println("3-NAND GATE 3 PASS");
+    }else{
+      gate_fail++;
+  Serial.println("3-NAND GATE 3 Fail");
+      }
+  
+
+if (gate_clear==3){
+  Serial.println("3-NAND GATE PASS");
+  }else if(gate_fail==3){
+    Serial.println("3-NAND GATE fail");
+    }else{
+    Serial.println("3-NAND GATE not all gate perfect");
+    }
+}    
+
+    
+
+
+       
+    
+    
