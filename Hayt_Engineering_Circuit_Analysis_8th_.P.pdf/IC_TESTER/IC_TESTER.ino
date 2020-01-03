@@ -6,11 +6,61 @@ void setup()
    lcd.init();  
   lcd.begin(16,2);
   lcd.backlight();
-  lcd.setCursor(0,0) ;
-  lcd.print("   LOGIC IC ");
+
+   lcd.setCursor(0,0) ;
+  lcd.print(" ***LOGIC IC*** ");
     lcd.setCursor(0,1) ;
   lcd.print("    TESTER ");
-  delay(5000);
+  delay(2000);for (int positionCounter = 0; positionCounter < 15; positionCounter++) {
+    // scroll one position left:
+    lcd.scrollDisplayLeft();
+    // wait a bit:
+    delay(150);
+  }
+  lcd.clear();
+    for (int positionCounter = 0; positionCounter < 14; positionCounter++) {
+  
+   lcd.scrollDisplayRight();
+    lcd.setCursor(0,0);
+    lcd.print("GROUP MEMBERS");
+    delay(100);
+  }
+  lcd.clear();
+for (int positionCounter = 0; positionCounter < 17; positionCounter++) {
+    lcd.setCursor(0,0);
+    lcd.print("AMMAD");
+    lcd.setCursor(0,1);
+    lcd.print("18B-036-EE");
+    lcd.scrollDisplayRight();
+    delay(200);
+  }
+  lcd.clear();
+for (int positionCounter = 0; positionCounter < 17; positionCounter++) {
+    lcd.setCursor(0,0);
+    lcd.print("USAID");
+    lcd.setCursor(0,1);
+    lcd.print("18B-023-EE");
+    lcd.scrollDisplayRight();
+    delay(200);
+  }
+   lcd.clear();
+for (int positionCounter = 0; positionCounter < 17; positionCounter++) {
+    lcd.setCursor(0,0);
+    lcd.print("QUNBER");
+    lcd.setCursor(0,1);
+    lcd.print("18B-008-TE");
+    lcd.scrollDisplayRight();
+    delay(200);
+  } 
+   lcd.clear();
+for (int positionCounter = 0; positionCounter < 17; positionCounter++) {
+    lcd.setCursor(0,0);
+    lcd.print("SADDAR");
+    lcd.setCursor(0,1);
+    lcd.print("18B-068-EE");
+    lcd.scrollDisplayRight();
+    delay(200);
+  } 
   Serial.begin(9600);
 
 pinMode(7,OUTPUT);///FOR BUTTON TO START TESTING
