@@ -9,9 +9,6 @@ void setup()
   lcd.setCursor(0,0) ;
   lcd.print("welcome");
   Serial.begin(9600);
-//  for(int i=22;i<=41;i++){
-//  pinMode(i,OUTPUT);
-//  }
 
 pinMode(7,OUTPUT);///FOR BUTTON TO START TESTING
   
@@ -30,8 +27,35 @@ pinMode(7,OUTPUT);///FOR BUTTON TO START TESTING
 void loop()
 {
  bool READ=digitalRead(7);
- 
-  
+ lcd.clear();
+ lcd.setCursor(0,0);
+ lcd.print("enter start button");
+  if (READ == 1){
+    lcd.clear();
+    lcd.setCursor(0,0);
+    lcd.print("TESTING.....");
+//    if (NAND()==true){
+//      displaylcd("NAND 7400");
+//      }
+//    if(XOR()==true){
+//      displaylcd("XOR 7486");
+//      }   
+//    if(AND_3()==true){
+//      displaylcd("AND 3 7411");
+//      }   
+//    if(NAND_3()==true){
+//      displaylcd("NAND 3 7410");
+////      }
+//    if(AND()==true){
+//      displaylcd("AND 7432");
+//      }
+         if(NOR()==true){
+      displaylcd("AND 7432");
+      } 
+//       if(OR()==true){
+//      displaylcd("OR 7408");
+//      }    
+    }
 //  if(digitalRead(34)==1){
 //  Serial.print("35");
 //  lcd.clear();  
@@ -43,11 +67,7 @@ void loop()
 //  AND();
 //  OR();
 //  NOR();
-digitalWrite(34,1);
-digitalWrite(35,0);
-Serial.println(digitalRead(34));
-NAND();
-delay(1000);
+//NAND();
 //  XOR();
 //  AND_3();
 //  NAND_3();
@@ -57,6 +77,7 @@ delay(1000);
 
 bool AND(){
   {
+    pin_3();
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -227,7 +248,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("AND PASSES TEST");
   return true;
 }else if(add==4){
-  Serial.println("Add gate test Fail");
+  Serial.println("And gate test Fail");
   return false;
 }
   else{
@@ -236,7 +257,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
-      return false;    
+      return true;    
     }
     }
 
@@ -246,6 +267,8 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
 
  bool OR(){
   {
+    pin_3();
+    
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -432,7 +455,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   
   }
   bool NOR(){
-  {
+  pin_3();
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -676,7 +699,7 @@ digitalWrite(35,0);
    digitalWrite(26,1);
   if( digitalRead(27)==0){/// 2nd gate clear
     gate_clear++;
-    digitalWrite(25,1);
+    digitalWrite(25,0);
    digitalWrite(26,1);
    if(digitalRead(27)==1){
     gate_clear++;
@@ -805,6 +828,7 @@ return true;
 
 bool XOR(){
   {
+  pin_3();
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -988,6 +1012,7 @@ return false;
    
 bool AND_3(){
   // 7411(3-AND)
+  pin_12();
   int gate_clear=0;
   int gate_fail=0;
   ///i,f j shold be declare gate 1 
@@ -1145,19 +1170,19 @@ Serial.println("3-AND GATE 3 PASS");
   
 
 if (gate_clear==3){
-  Serial.println("3-AND GATE PASS");
+  Serial.println("3-AND GATE PASS finally");
   return true;
   }else if(gate_fail==3){
     Serial.println("3-AND GATE fail");
     return false;
     }else{
-    Serial.println("3-AND GATE not all gate perfect");
-    return false;
+        return true;
     }
 }    
    
 bool NAND_3(){
   // 7410(3-NAND)
+  pin_12();
   int gate_clear=0;
   int gate_fail=0;
   ///i,f j shold be declare gate 1 
@@ -1321,11 +1346,14 @@ if (gate_clear==3){
     Serial.println("3-NAND GATE fail");
     return false;
     }else{
-    Serial.println("3-NAND GATE not all gate perfect");
-    return false;
+
+    return true;
     }
 }    
 void pin_3(){
+  
+  digitalWrite(35,0);
+  digitalWrite(34,1);
    for(int i=22;i<=41;i++){
   if(i==24||i==27||i==30||i==33){
   pinMode(i,INPUT);}
@@ -1334,6 +1362,18 @@ void pin_3(){
     }
   }
   }
+void pin_12(){
+  digitalWrite(35,0);
+  digitalWrite(34,1);
+  
+   for(int i=22;i<=41;i++){
+  if(i==29||i==27||i==33){
+  pinMode(i,INPUT);}
+  else{
+    pinMode(i,OUTPUT);
+    }
+  }
+  }  
     
 /*PIN CONFIGRATION IN ARDUNIO MEGA
 22     34->VCC FOR 14 PIN IC 
@@ -1347,7 +1387,14 @@ void pin_3(){
 38     35
 39     36
 */
-
+void displaylcd(String a){
+  
+      lcd.clear();
+      lcd.setCursor(0,0);
+      lcd.print("IC Passes");
+      lcd.setCursor(0,1);
+      lcd.print(a);
+  }
        
     
     
