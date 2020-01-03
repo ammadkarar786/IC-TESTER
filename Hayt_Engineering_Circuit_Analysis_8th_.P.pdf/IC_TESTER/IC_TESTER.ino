@@ -55,7 +55,7 @@ void loop()
 //       if(OR()==true){
 //      displaylcd("OR 7408");
 //      }    
-    }
+    
 //  if(digitalRead(34)==1){
 //  Serial.print("35");
 //  lcd.clear();  
@@ -74,6 +74,7 @@ void loop()
   
   
     }
+}
 
 bool AND(){
   {
@@ -448,14 +449,10 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
-    }
-    }
-
-  
-  
-  }
+    }}}
+    
   bool NOR(){
-  pin_3();
+    pin_3();
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -636,7 +633,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
           Serial.println(gate_fail_pin[i]);
           }
     }
-    }}
+    }
 
 bool NAND(){
   {
