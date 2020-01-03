@@ -62,17 +62,21 @@ void loop()
       else if (NOT()== true){
         displaylcd("NOT 7404");
         }
+        else if (XNOR()==true){
+          displaylcd("XNOR 74266");
+          }
       else{
         lcd.clear();
+        while(digitalRead(7)==0 ){
         lcd.setCursor(0,0);
         lcd.print("IC FAIL NOT");
         lcd.setCursor(0,1);
         lcd.print("FOUND");
         }
+        }
         delay(500);    
-    
-  
-  
+  ////TTHE VCC AND THE GNG ARE GIVEN AT PIN NO 34 (VCC)AND PIN 35 IS GND
+
     }
 }
 
@@ -1467,6 +1471,197 @@ bool NOT(){
       return false;
       }
   }       
+bool XNOR(){
+  {
+digitalWrite(35,0);
+  digitalWrite(34,1);
+   for(int i=22;i<=41;i++){
+  if(i==24||i==25||i==30||i==31){
+  pinMode(i,INPUT);}
+  else{
+    pinMode(i,OUTPUT);
+    }
+  }
   
+  int gate_clear=0;
+  int gate_fail=0;
+  int gate_fail_pin[4];
+  int add=0;
+  //first gate/ //4077
+  //pin number
+  gate_fail=0;
+  gate_clear=0;
+  bool gate1;
+  int p3=3;
+   digitalWrite(22,1);
+   digitalWrite(23,1);
+  if( digitalRead(24)==1){/// first gate clear
+    gate_clear++;
+    digitalWrite(22,0);
+   digitalWrite(23,1);
+   if(digitalRead(24)==0){
+    gate_clear++;
+    digitalWrite(22,0);
+   digitalWrite(23,0);
+   if (digitalRead(24)==1){
+    Serial.println("XNOR GATE 1 CLEAR PIN 1,2,3");
+    }else{
+      gate_fail++;
+      }
+   }else{
+    gate_fail++;
+      }
+   
+    }
+    
+   else{  ////first gate not clear
+    gate_fail++;
+    Serial.println("First gate not clear 1,2,3");
+   }
+   if (gate_fail>0){
+    gate1=false;
+      
+      gate_fail_pin[add]=p3;
+    add++;
+}
+    else{
+    gate1=true;
+    }
+///checking of gate one ended
+//Second gate/ //4077
+  //pin number
+  gate_fail=0;
+  gate_clear=0;
+  bool gate2;
+  p3=6;
+   digitalWrite(27,1);
+   digitalWrite(26,1);
+  if( digitalRead(25)==1){/// 2nd gate clear
+    gate_clear++;
+    digitalWrite(27,0);
+   digitalWrite(26,1);
+   if(digitalRead(25)==0){
+    gate_clear++;
+    digitalWrite(27,0);
+   digitalWrite(26,0);
+   if (digitalRead(25)==1){
+    Serial.println("XNOR GATE 2 CLEAR PIN 4,5,6");
+    }else{
+      gate_fail++;
+      }
+   }else{
+    gate_fail++;
+      }
+   
+    }
+    
+   else{  ////2nd gate not clear
+    gate_fail++;
+    Serial.println("XNOR GATE 2 not clear PIN 4,5,6");
+   }
+   if (gate_fail>0){
+    gate2=false;
+    
+    gate_fail_pin[add]=p3;
+    add++;
+    }
+    else{
+    gate2=true;
+    }
+//third gate/ //4077
+  //pin number
+  p3=11;
+    gate_fail=0;
+  gate_clear=0;
+  bool gate3;
+   digitalWrite(28,1);
+   digitalWrite(29,1);
+  if( digitalRead(30)==1){/// 3rd gate clear
+    gate_clear++;
+    digitalWrite(28,0);
+   digitalWrite(29,1);
+    if(digitalRead(30)==0){
+    gate_clear++;
+    digitalWrite(28,0);
+   digitalWrite(29,0);
+   if (digitalRead(30)==1){
+    Serial.println("XNOR GATE 3 CLEAR PIN 13,12,11");
+    }else{
+      gate_fail++;
+      }
+   }else{
+    gate_fail++;
+      }
+   
+    }
+    
+   else{  ////3rd gate not clear
+    gate_fail++;
+    Serial.println("3rd gate not clear 13,12,11");
+   }
+   if (gate_fail>0){
+    gate3=false;
+    gate_fail_pin[add]=p3;
+add++;
+    }
+    else{
+    gate3=true;
+    }
+///checking of gate 3rd ended
+    
+//4th gate/ //4077
+  //pin number
+  gate_fail=0;
+  gate_clear=0;
+  bool gate4;
+  p3=8;
+   digitalWrite(33,1);
+   digitalWrite(32,1);
+  if( digitalRead(31)==1){/// 4th gate clear
+    gate_clear++;
+    digitalWrite(33,0);
+   digitalWrite(32,1);
+   if(digitalRead(31)==0){
+    gate_clear++;
+    digitalWrite(33,0);
+   digitalWrite(32,0);
+     if (digitalRead(31)==1){
+    Serial.println("XNOR GATE 4 CLEAR PIN 10,9,8");
+    }else{
+      gate_fail++;
+      }
+   }else{
+    gate_fail++;
+      }
+ 
+    }
+    
+   else{  ////4th gate not clear
+    gate_fail++;
+    Serial.println("4th gate not clear 10,9,8");
+   }
+   if (gate_fail>0){
+    gate4=false;
+    gate_fail_pin[add]=p3;
+    add++;
+}
+    if (gate_clear>0){
+   gate4=true;
+    }///checking of gate 4th ended
+
+if (gate1==true && gate2==true && gate3==true &&gate4==true){
+  Serial.println("XNOR PASSES TEST");
+  return true; 
+}else if(add==4){
+  Serial.println("XNOR gate test Fail");
+return false;
+}
+  else{
+        Serial.println("list of fault gate pin");
+         return false;
+         for (int i=0;i<add;i++){
+          Serial.println(gate_fail_pin[i]);
+          }
+    }}} 
     
     
