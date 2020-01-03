@@ -7,7 +7,10 @@ void setup()
   lcd.begin(16,2);
   lcd.backlight();
   lcd.setCursor(0,0) ;
-  lcd.print("welcome");
+  lcd.print("   LOGIC IC ");
+    lcd.setCursor(0,1) ;
+  lcd.print("    TESTER ");
+  delay(5000);
   Serial.begin(9600);
 
 pinMode(7,OUTPUT);///FOR BUTTON TO START TESTING
@@ -29,48 +32,45 @@ void loop()
  bool READ=digitalRead(7);
  lcd.clear();
  lcd.setCursor(0,0);
- lcd.print("enter start button");
+ lcd.print("ENTER START");
+ lcd.setCursor(0,1);
+ lcd.print("BUTTON");
+ delay(700);
   if (READ == 1){
     lcd.clear();
     lcd.setCursor(0,0);
     lcd.print("TESTING.....");
-//    if (NAND()==true){
-//      displaylcd("NAND 7400");
-//      }
-//    if(XOR()==true){
-//      displaylcd("XOR 7486");
-//      }   
-//    if(AND_3()==true){
-//      displaylcd("AND 3 7411");
-//      }   
-//    if(NAND_3()==true){
-//      displaylcd("NAND 3 7410");
-////      }
-//    if(AND()==true){
-//      displaylcd("AND 7432");
-//      }
-         if(NOR()==true){
-      displaylcd("AND 7432");
+    delay(500);      
+    if (NAND()==true){
+      displaylcd("NAND 7400");
+      }
+    else if(XOR()==true){
+      displaylcd("XOR 7486");
+      }    
+    else if(NAND_3()==true){
+      displaylcd("NAND 3 7410");
+      }
+    else if(AND()==true){
+      displaylcd("AND 7408");
+      }
+         else if(NOR()==true){
+      displaylcd("NOR 7402");
       } 
-//       if(OR()==true){
-//      displaylcd("OR 7408");
-//      }    
+       else if(OR()==true){
+      displaylcd("OR 7432");
+      }
+      else if (NOT()== true){
+        displaylcd("NOT 7404");
+        }
+      else{
+        lcd.clear();
+        lcd.setCursor(0,0);
+        lcd.print("IC FAIL NOT");
+        lcd.setCursor(0,1);
+        lcd.print("FOUND");
+        }
+        delay(500);    
     
-//  if(digitalRead(34)==1){
-//  Serial.print("35");
-//  lcd.clear();  
-//  lcd.setCursor(0,0);
-//  lcd.print("Testing Start ...");
-//  }
-  ////TTHE VCC AND THE GNG ARE GIVEN AT PIN NO 34 (VCC)AND PIN 35 IS GND
-
-//  AND();
-//  OR();
-//  NOR();
-//NAND();
-//  XOR();
-//  AND_3();
-//  NAND_3();
   
   
     }
@@ -252,14 +252,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("And gate test Fail");
   return false;
 }
-  else{
-        Serial.println("list of fault gate pin");
-         
-         for (int i=0;i<add;i++){
-          Serial.println(gate_fail_pin[i]);
-          }
-      return true;    
-    }
+  
     }
 
   
@@ -452,7 +445,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     }}}
     
   bool NOR(){
-    pin_3();
+    pin_1();
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
@@ -514,7 +507,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     gate_clear++;
     digitalWrite(26,0);
    digitalWrite(27,0);
-   if (digitalRead(25)==0){
+   if (digitalRead(25)==1){
     Serial.println("NOR GATE 2 CLEAR PIN 4,5,6");
     }else{
       gate_fail++;
@@ -546,7 +539,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   bool gate3;
    digitalWrite(29,1);
    digitalWrite(30,1);
-  if( digitalRead(28)==1){/// 3rd gate clear
+  if( digitalRead(28)==0){/// 3rd gate clear
     gate_clear++;
     digitalWrite(29,0);
    digitalWrite(30,1);
@@ -554,7 +547,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
     gate_clear++;
     digitalWrite(29,0);
    digitalWrite(30,0);
-   if (digitalRead(28)==0){
+   if (digitalRead(28)==1){
     Serial.println("NOR GATE 3 CLEAR PIN 13,12,11");
     }else{
       gate_fail++;
@@ -587,7 +580,7 @@ add++;
   p3=10;
    digitalWrite(32,1);
    digitalWrite(33,1);
-  if( digitalRead(31)==1){/// 4th gate clear
+  if( digitalRead(31)==0){/// 4th gate clear
     gate_clear++;
     digitalWrite(32,0);
    digitalWrite(33,1);
@@ -595,7 +588,7 @@ add++;
     gate_clear++;
     digitalWrite(32,0);
    digitalWrite(33,0);
-     if (digitalRead(31)==0){
+     if (digitalRead(31)==1){
     Serial.println("NOR GATE 4 CLEAR PIN 10,9,8");
     }else{
       gate_fail++;
@@ -637,7 +630,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
 
 bool NAND(){
   {
-   Serial.println("inside");
+
     pin_3();
     digitalWrite(34,1);
 digitalWrite(35,0);
@@ -1172,8 +1165,6 @@ if (gate_clear==3){
   }else if(gate_fail==3){
     Serial.println("3-AND GATE fail");
     return false;
-    }else{
-        return true;
     }
 }    
    
@@ -1342,9 +1333,6 @@ if (gate_clear==3){
   }else if(gate_fail==3){
     Serial.println("3-NAND GATE fail");
     return false;
-    }else{
-
-    return true;
     }
 }    
 void pin_3(){
@@ -1371,6 +1359,18 @@ void pin_12(){
     }
   }
   }  
+void pin_1(){
+  digitalWrite(35,0);
+  digitalWrite(34,1);
+  
+   for(int i=22;i<=41;i++){
+  if(i==22||i==25||i==28||i==31){
+  pinMode(i,INPUT);}
+  else{
+    pinMode(i,OUTPUT);
+    }
+  }
+  }  
     
 /*PIN CONFIGRATION IN ARDUNIO MEGA
 22     34->VCC FOR 14 PIN IC 
@@ -1387,11 +1387,86 @@ void pin_12(){
 void displaylcd(String a){
   
       lcd.clear();
+      while(digitalRead(7)==0){
       lcd.setCursor(0,0);
       lcd.print("IC Passes");
       lcd.setCursor(0,1);
       lcd.print(a);
+      }
+  
   }
-       
+bool NOT(){
+  /*PIN CONFIGRATION IN ARDUNIO MEGA
+22     34->VCC FOR 14 PIN IC 
+23     28
+24     29
+25     30
+26     31
+27     32     
+35->GND33
+37     34
+38     35
+39     36
+*/
+  digitalWrite(35,0);
+  digitalWrite(34,1);
+  int gateclear=0;
+  int gatefail=0;
+   for(int i=22;i<=41;i++){
+  if(i%2==0){
+  pinMode(i,OUTPUT);}
+  else{
+    pinMode(i,INPUT);
+    }
+  }
+  digitalWrite(22,0);//1 gate
+   if(digitalRead(23)==1){
+    gateclear++;
+    }
+    else{
+      gatefail++;
+      }
+  digitalWrite(24,0);//2 gate
+   if(digitalRead(25)==1){
+    gateclear++;
+    }
+    else{
+      gatefail++;
+      }
+  digitalWrite(26,0);//3 gate
+   if(digitalRead(27)==1){
+    gateclear++;
+    }
+    else{
+      gatefail++;
+      }
+  digitalWrite(28,0);//4 gate
+   if(digitalRead(29)==1){
+    gateclear++;
+    }
+    else{
+      gatefail++;
+      }
+  digitalWrite(30,0);//5 gate
+   if(digitalRead(31)==1){
+    gateclear++;
+    }
+    else{
+      gatefail++;
+      }
+  digitalWrite(32,0);//6 gate
+   if(digitalRead(33)==1){
+    gateclear++;
+    }
+    else{
+      gatefail++;
+      }
+  if (gateclear==6){
+    return true;
+    }else {
+      return false;
+      }
+  }       
+  
     
     
