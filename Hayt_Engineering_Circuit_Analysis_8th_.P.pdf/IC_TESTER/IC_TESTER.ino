@@ -1,9 +1,20 @@
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 20,4);
 void setup()
 {
+   lcd.init();  
+  lcd.begin(16,2);
+  lcd.backlight();
+  lcd.setCursor(0,0) ;
+  lcd.print("welcome");
   Serial.begin(9600);
-  for(int i=22;i<=41;i++){
-  pinMode(i,OUTPUT);
-  }
+//  for(int i=22;i<=41;i++){
+//  pinMode(i,OUTPUT);
+//  }
+
+pinMode(7,OUTPUT);///FOR BUTTON TO START TESTING
+  
 }/*PIN CONFIGRATION IN ARDUNIO MEGA
 22     34->VCC FOR 14 PIN IC 
 23     28
@@ -18,12 +29,33 @@ void setup()
 */
 void loop()
 {
+ bool READ=digitalRead(7);
+ 
+  
+//  if(digitalRead(34)==1){
+//  Serial.print("35");
+//  lcd.clear();  
+//  lcd.setCursor(0,0);
+//  lcd.print("Testing Start ...");
+//  }
   ////TTHE VCC AND THE GNG ARE GIVEN AT PIN NO 34 (VCC)AND PIN 35 IS GND
-  AND();
-  OR();
+
+//  AND();
+//  OR();
+//  NOR();
+digitalWrite(34,1);
+digitalWrite(35,0);
+Serial.println(digitalRead(34));
+NAND();
+delay(1000);
+//  XOR();
+//  AND_3();
+//  NAND_3();
+  
+  
     }
 
-void AND(){
+bool AND(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -193,8 +225,10 @@ add++;
 
 if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("AND PASSES TEST");
+  return true;
 }else if(add==4){
   Serial.println("Add gate test Fail");
+  return false;
 }
   else{
         Serial.println("list of fault gate pin");
@@ -202,6 +236,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
+      return false;    
     }
     }
 
@@ -209,7 +244,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   
   }
 
- void OR(){
+ bool OR(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -379,12 +414,14 @@ add++;
 
 if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("OR PASSES TEST");
+  return true;
 }else if(add==4){
   Serial.println("OR gate test Fail");
+   return false;
 }
   else{
         Serial.println("list of fault gate pin");
-         
+         return false;
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
@@ -394,7 +431,7 @@ if (gate1==true && gate2==true && gate3==true &&gate4==true){
   
   
   }
-  void NOR(){
+  bool NOR(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -564,25 +601,31 @@ add++;
 
 if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("NOR PASSES TEST");
+  return true;
 }else if(add==4){
   Serial.println("NOR gate test Fail");
+  return false;
 }
   else{
         Serial.println("list of fault gate pin");
-         
+         return false;
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
     }
     }}
 
-void NAND(){
+bool NAND(){
   {
+   Serial.println("inside");
+    pin_3();
+    digitalWrite(34,1);
+digitalWrite(35,0);
   int gate_clear=0;
   int gate_fail=0;
   int gate_fail_pin[4];
   int add=0;
-  //first gate/ //7408
+  //first gate/ //7400
   //pin number
   gate_fail=0;
   gate_clear=0;
@@ -743,22 +786,24 @@ add++;
     if (gate_clear>0){
    gate4=true;
     }///checking of gate 4th ended
-
+Serial.println(gate1);
 if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("NAND PASSES TEST");
+return true;
 }else if(add==4){
   Serial.println("NAND gate test Fail");
+ return false;
 }
   else{
         Serial.println("list of fault gate pin");
-         
+         return false;
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
     }
     }}
 
-void XOR(){
+bool XOR(){
   {
   int gate_clear=0;
   int gate_fail=0;
@@ -928,18 +973,20 @@ add++;
 
 if (gate1==true && gate2==true && gate3==true &&gate4==true){
   Serial.println("XOR PASSES TEST");
+  return true; 
 }else if(add==4){
   Serial.println("XOR gate test Fail");
+return false;
 }
   else{
         Serial.println("list of fault gate pin");
-         
+         return false;
          for (int i=0;i<add;i++){
           Serial.println(gate_fail_pin[i]);
           }
     }}} 
    
-void AND_3(){
+bool AND_3(){
   // 7411(3-AND)
   int gate_clear=0;
   int gate_fail=0;
@@ -1099,14 +1146,17 @@ Serial.println("3-AND GATE 3 PASS");
 
 if (gate_clear==3){
   Serial.println("3-AND GATE PASS");
+  return true;
   }else if(gate_fail==3){
     Serial.println("3-AND GATE fail");
+    return false;
     }else{
     Serial.println("3-AND GATE not all gate perfect");
+    return false;
     }
 }    
    
-void NAND_3(){
+bool NAND_3(){
   // 7410(3-NAND)
   int gate_clear=0;
   int gate_fail=0;
@@ -1266,15 +1316,37 @@ Serial.println("3-NAND GATE 3 PASS");
 
 if (gate_clear==3){
   Serial.println("3-NAND GATE PASS");
+  return true;
   }else if(gate_fail==3){
     Serial.println("3-NAND GATE fail");
+    return false;
     }else{
     Serial.println("3-NAND GATE not all gate perfect");
+    return false;
     }
 }    
-
+void pin_3(){
+   for(int i=22;i<=41;i++){
+  if(i==24||i==27||i==30||i==33){
+  pinMode(i,INPUT);}
+  else{
+    pinMode(i,OUTPUT);
+    }
+  }
+  }
     
-
+/*PIN CONFIGRATION IN ARDUNIO MEGA
+22     34->VCC FOR 14 PIN IC 
+23     28
+24     29
+25     30
+26     31
+27     32     
+35->GND33
+37     34
+38     35
+39     36
+*/
 
        
     
